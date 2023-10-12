@@ -1,4 +1,24 @@
 {%extends 'base.html'%}
 {% block start %}
-    
+<div class="container mt-5">
+    <form class="form col-6 card p-3 shadow-lg mx-auto" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h3>Add Dish-Recipe</h3>
+        <hr>
+        <div class="mb-3">
+            <label class="form-label">Dish name</label>
+            <input name="dish_name" type="text" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Dish description</label>
+            <textarea name="dish_description" class="form-control"></textarea>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Dish Image</label>
+            <input name="dish_image" type="file" class="form-control">
+        </div>
+        <button class="btn btn-success" type="submit">Submit</button>
+    </form>
+</div>
+
 {% endblock %}
