@@ -1,5 +1,5 @@
 """
-URL configuration for newproject project.
+URL configuration for lonavla project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
@@ -16,14 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from newapp.views import *  # Alias the views from the 'newapp' app
-from vege.views import *
+from kitchen.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',home,name="home"),
-    path('about/',about,name="about"),
-    path('contact/',contact,name="contact"),
-    path('receipes/',receipes,name="receipes"),
-
+    path('dish/',dish,name="dish")
 ]
