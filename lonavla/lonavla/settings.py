@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-uf4ie08luh$)1a$jr@yc2405m@975*0o4eu^t(&$f^8u)&wxak'
+SECRET_KEY = 'django-insecure-lj&9c-3e1$d4-loc3b_lq-m#ssdacta(d)3k=c4)49wq)*%mh-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'kitchen'
+    'dish'
 ]
 
 MIDDLEWARE = [
@@ -77,7 +77,11 @@ WSGI_APPLICATION = 'lonavla.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME' : 'django_mysql',
+        'USER' :'root',
+        'PASSWORD' : 'roots',
+        'HOST' : 'localhost',
+        'PORT' : '3306',
     }
 }
 
@@ -115,8 +119,15 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
+import os
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+STATICFILES_DIR = os.path.join(BASE_DIR,'public/static')
+
+MEDIA_ROOT = os.path.join(BASE_DIR,'public/static')
+MEDIA_URL = '/media/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
