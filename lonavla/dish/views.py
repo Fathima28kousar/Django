@@ -2,7 +2,11 @@ from django.shortcuts import render,redirect
 from .models import *
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
+
+@login_required(login_url='/login/')
 def dish(request):
     if request.method =='POST':
         data=request.POST
@@ -26,11 +30,15 @@ def dish(request):
 
     return render(request,'dish.html',context)
 
+
+@login_required(login_url='/login/')
 def delete_dish(request,id):
     queryset = Dish.objects.get(id=id)
     queryset.delete()
     return redirect('/dish/')
       
+
+@login_required(login_url='/login/')
 def update_dish(request,id):
     queryset = Dish.objects.get(id=id)
 
@@ -54,7 +62,30 @@ def update_dish(request,id):
     return render(request,'update_dish.html',context)
 
 def login_page(request):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        
+        if not User.objects.filter(username=username).exists():
+            messages.error(request,'Invalid Username')
+            return redirect('/login/')
+        
+        user = authenticate(username=username, password=password)
+        if user is None:
+            messages.error(request,'Invalid Password')
+            return redirect('/login/')
+        else:
+            login(request, user)
+            return redirect('/dish/')
+        
+
     return render(request,'login.html')
+
+
+def logout_page(request):
+    logout(request)
+    return redirect('/login/')
+
 
 def register(request):
     if request.method == "POST":

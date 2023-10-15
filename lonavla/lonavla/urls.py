@@ -23,11 +23,12 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('dish/',dish),
+    path('dish/',dish,name='dish'),
     path('delete_dish/<id>/', delete_dish),
     path('update_dish/<id>/',update_dish),
     path('login/',login_page),
     path('register/',register),
+    path('logout/',logout_page),
 ]
 
 if settings.DEBUG:

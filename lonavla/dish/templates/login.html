@@ -11,28 +11,18 @@
             {{message}}
             {% endfor %}
         </div>
-        {% endif %}
-        
-        <div class="mb-3">
-            <label class="form-label">email</label>
-            <input type="email" class="form-control" id="emailHelp">We'll never share your email with anyone
-        </div>
+        {% endif %}    
+
         <div class="mb-3">
             <label class="form-label">username</label>
             <input type="text" class="form-control" name="username">
         </div>
         <div class="mb-3">
             <label class="form-label">Password</label>
-            <input type="password" class="form-control" >
+            <input type="password" class="form-control" name="password">
         </div>
         <p>Don't have account? <a href="/register/">Register</a></p>
         <button type="submit" class="btn btn-success">Submit</button>
     </form>
 </div>
-
-
-
-
-
-
 {% endblock%}
