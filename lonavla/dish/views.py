@@ -1,8 +1,10 @@
 from django.shortcuts import render,redirect
 from .models import *
+from django.contrib.auth.models import User
+from django.contrib import messages
 
 def dish(request):
-    if request.method=='POST':
+    if request.method =='POST':
         data=request.POST
         dish_name = data.get('dish_name')
         dish_description = data.get('dish_description')
@@ -16,6 +18,69 @@ def dish(request):
 
         return redirect('/dish/')
     queryset = Dish.objects.all()
+    
+    if request.GET.get('search'):
+        # print(request.GET.get('search'))
+        queryset = queryset.filter(dish_name__icontains = request.GET.get('search'))
     context = {'dish':queryset}
 
     return render(request,'dish.html',context)
+
+def delete_dish(request,id):
+    queryset = Dish.objects.get(id=id)
+    queryset.delete()
+    return redirect('/dish/')
+      
+def update_dish(request,id):
+    queryset = Dish.objects.get(id=id)
+
+    if request.method == 'POST':
+        data = request.POST
+        dish_name = data.get('dish_name')
+        dish_description = data.get('dish_description')
+        dish_image = request.FILES.get('receipe_image')
+
+        queryset.dish_name = dish_name
+        queryset.dish_description = dish_description
+        if dish_image:
+            queryset.dish_image = dish_image
+
+        queryset.save()
+        return redirect('/dish/')
+
+
+
+    context = {'dish':queryset}
+    return render(request,'update_dish.html',context)
+
+def login_page(request):
+    return render(request,'login.html')
+
+def register(request):
+    if request.method == "POST":
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        if not username:
+            messages.error(request, 'Username is required')
+            return redirect('/register/')
+
+        user = User.objects.filter(username=username)
+        if user.exists():
+            messages.error(request,'Username already exists')
+            return redirect('/register/')
+        
+        user = User.objects.create(
+            first_name = first_name,
+            last_name = last_name,
+            username = username
+        )
+        user.set_password(password)
+        user.save()
+        messages.info(request,'Account created successfully')
+        return redirect('/login/')
+
+    return render(request,'register.html')
+    

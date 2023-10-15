@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 {% block start %}
 <div class="container mt-5">
+
     <form class="col-6 card mx-auto shadow-lg p-3" method="POST" enctype="multipart/form-data">
+        <h2>Add dish</h2>
+        <hr>
         {%csrf_token%}
         <div class="mb-3">
             <label class="form-label">Dish name</label>
@@ -17,6 +20,20 @@
         </div>
         <button class="btn btn-success">Add the Dish</button>
     </form>
+    <hr>
+    <div class="mx-auto col-6">
+        <form>
+            <label class="form-label">Search</label>
+            <input type="text" name="search" class="form-control mb-2">
+            <button type="submit" class="btn btn-primary mb-5">Search</button>
+        </form>
+        
+       
+    </div>
+
+    <hr>
+    
+
     <table class="table">
         <thead>
             <tr>
@@ -30,9 +47,12 @@
             {%for dis in dish%}
             <tr>
                 <th class="row">{{forloop.counter}}</th>
-                <th>{{dis.dish_name}}</th>
-                <th>{{dis.dish_description}}</th>
-                <th><img src="/media/ {{dis.dish_image}}" style="height:100px;"></th>
+                <td>{{dis.dish_name}}</td>
+                <td>{{dis.dish_description}}</td>
+                <td><img src="/media/{{dis.dish_image}}" style="height:100px;"></td>
+
+                <td><a href="/delete_dish/{{dis.id}}/" class="btn btn-danger mb-2" > Delete </a><br>
+                <a href="/update_dish/{{dis.id}}/" class="btn btn-success " >Update</a></td>
             </tr>
             {% endfor %}
         </tbody>
