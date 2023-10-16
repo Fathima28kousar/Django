@@ -1,5 +1,5 @@
 """
-URL configuration for lonavla project.
+URL configuration for S project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
@@ -16,28 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from dish.views import *
-from django.conf.urls.static import static
-from django.conf import settings
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-
-
-
-
+from A.views import *
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('dish/',dish,name='dish'),
-    path('delete_dish/<id>/', delete_dish),
-    path('update_dish/<id>/',update_dish),
-    path('login/',login_page),
-    path('register/',register),
-    path('logout/',logout_page),
-   
+    path('login_page/',login_page,name="login_page"),
 ]
-
-if settings.DEBUG:
-        urlpatterns += static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)
-
-urlpatterns += staticfiles_urlpatterns()

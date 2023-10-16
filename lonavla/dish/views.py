@@ -3,10 +3,10 @@ from .models import *
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
 
 
-@login_required(login_url='/login/')
+
+
 def dish(request):
     if request.method =='POST':
         data=request.POST
@@ -31,14 +31,16 @@ def dish(request):
     return render(request,'dish.html',context)
 
 
-@login_required(login_url='/login/')
+
 def delete_dish(request,id):
     queryset = Dish.objects.get(id=id)
     queryset.delete()
     return redirect('/dish/')
+
+
       
 
-@login_required(login_url='/login/')
+
 def update_dish(request,id):
     queryset = Dish.objects.get(id=id)
 
@@ -95,7 +97,7 @@ def register(request):
         password = request.POST.get('password')
 
         if not username:
-            messages.error(request, 'Username is required')
+            messages.error(request,'Username is required')
             return redirect('/register/')
 
         user = User.objects.filter(username=username)
