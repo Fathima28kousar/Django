@@ -8,5 +8,24 @@
 </head>
 <body>
     <h1>Heading1</h1>
+    <table border="2">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Age</th>
+            <th>Address</th>
+        </tr>
+        {% for student in student_list %}
+            <tr>    
+                <td>{{ student.student_id }}</td>
+                <td>{{ student.student_name }}</td>
+                <td>{{ student.student_email }}</td>
+                <td>{{ student.student_age }}</td>
+                <td>{{ student.student_address }}</td>
+            </tr>
+        {% endfor %}
+    </table>
 </body>
+
 </html>

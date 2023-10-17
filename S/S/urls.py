@@ -22,4 +22,5 @@ from A.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login_page/',login_page,name="login_page"),
+    path('logout_page/',logout_page,name="logout_page"),
 ]
