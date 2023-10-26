@@ -1,0 +1,13 @@
+{%extends 'base.html'%}
+{% block start %}
+<h2>Update the new car</h2>
+<div class="mb-3">
+    <label class="form-label">Car name</label>
+    <input type="text" name="car_name" value="{{car.car_name}}" required>
+</div>
+<div class="mb-3">
+    <label class="form-label">Car Price</label>
+    <input type="text" name="car_name" value="{{car.car_price}}" required>
+</div>
+<button type="submit" class="btn btn-success" >Update Car</button>
+{% endblock %}

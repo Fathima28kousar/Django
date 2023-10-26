@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block start %}
+<div class="container mt-5">
+    <form class="col-6 card p-3 shadow-lg container" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h1>Add your favorite car</h1>
+        <hr>
+        <div class="mb-1">
+            <label class="form-label">Car name</label>
+            <input type="text" class="form-control" name ="car_name">
+        </div>
+
+        <div class="mb-1">
+            <label  class="form-label">Car speed</label>
+            <input type="text" class="form-control" name ="car_speed">
+        </div>
+        <div class="mb-1">
+            <label  class="form-label">Car price</label>
+            <input type="number" class="form-control" name ="car_price">
+        </div>
+
+        <div class="mb-1">
+            <label  class="form-label">Car Description</label>
+            <textarea class="form-control" name ="car_description"></textarea> 
+        </div>
+        <div class="mb-1">
+            <label  class="form-label">Car Image</label>
+            <input type="file" class="form-control" name ="car_image">
+            
+        </div>
+        
+        <button class="btn btn-success" type="submit">Submit</button>
+    </form>
+    <table class="table container" >
+        <thead>
+            <th scope="col">#</th>
+            <th scope="col">Car Name</th>
+            <th scope="col">Car Price</th>
+            <th scope="col">Car image</th>
+        </thead>
+        <tbody>
+            {% for c in car %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{c.car_name}}</td>
+                <td>{{c.car_price}}</td>
+                <td><img src="/media/{{c.car_image}}" style="height: 100px;" ></td>
+                <td><a href="/delete_car/{{c.id}}/" class="btn btn-danger" type="submit">Delete</a></td>
+                <td><a href="/update_car/{{c.id}}/" class="btn btn-success" type="submit">Update</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}

@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Department(models.Model):
     department = models.CharField(max_length=100)
     
@@ -29,3 +30,16 @@ class Student(models.Model):
     class Meta:
         ordering = ['student_name']
         verbose_name = "student"
+
+class Employee(models.Model):
+    ename = models.TextField(max_length=100)
+    email = models.EmailField()
+    esal = models.FloatField()
+    eaddress = models.TextField()
+    
+class Car(models.Model):
+    car_name = models.TextField(max_length=500)
+    car_speed = models.IntegerField()
+    car_price = models.IntegerField()
+    car_description = models.TextField()
+    car_image = models.ImageField(upload_to="car")

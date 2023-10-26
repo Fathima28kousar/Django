@@ -1,0 +1,43 @@
+{%extends 'base.html'%}
+{%block start%}
+<h1 class="container">vegetables page</h1>
+<p class="container"><a href="/">home | </a>
+<a href="/login_page/">login_page | </a>
+<a href="/logout_page/">logout_page | </a>
+<a href="/house/">house | </a></p>
+
+    <h1  class="container">This is a django project</h1>
+    <table border="3" class="container table table-bordered">
+        <tr>
+            <th>S.no</th>
+            <th>Name</th>
+            <th>Marks</th>
+            <th>location</th>
+        </tr>
+        {% for people in peoples %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{people.name}}</td>
+            <td>{{people.age}}</td>
+            <td>{{people.location}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <div class="container">{{text|truncatechars:500}}</div>
+    <br>
+    <div class="container">{{text}}</div>
+
+    <p class="container" style="color:brown">
+        {% if "cucumber" in vegetables %}
+        Yes available
+        {% elif "banana" in vegetables %}
+        banana is available
+        {% else %}
+        Not available
+        {% endif %}
+    </p>
+
+
+   
+{%endblock%}
+
