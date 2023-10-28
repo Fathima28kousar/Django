@@ -20,7 +20,9 @@ from appforpractice.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('index',index,name="index"),
+    path('',index,name="index"),
     path('removepunc',removepunc,name="removepunc"),
     path('analyze',analyze,name="analyze"),
+    path('contact',contact,name="contact"),
+    path('about',about,name="about"),
 ]
