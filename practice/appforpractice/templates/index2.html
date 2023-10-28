@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>template1</title>
+</head>
+<body>
+    <h1>hello</h1>
+    {{name}} is from {{place}}
+    <h1>Welcome to text analyzer</h1>
+    <form action="/analyze" method="get">
+        <textarea name="text" style="height:200px; width:600px;"></textarea><br>
+        <input type="checkbox" name="removepunc">Remove punctuations<br>
+        <input type="checkbox" name="fullcaps">UPPERCASE<br>
+        <input type="checkbox" name="newlineremover">New line remover<br>
+        <input type="checkbox" name="extraspaceremover">Extraspaceremover<br>
+        <button type="submit">Analyze text</button>
+    </form>
+</body>
+</html>

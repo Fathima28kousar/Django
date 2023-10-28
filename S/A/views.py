@@ -86,23 +86,7 @@ def update_car(request,id):
     context = {'car':queryset}
     return render(request,'update_car.html',context)
 
-def index(request):
-    params = {'name':'fathima','place':'Mars'}
-    return render(request,'one.html',params)
 
-def removepunc(request):
-    djtext = (request.GET.get('text', 'default'))
-    print(djtext)
-    return HttpResponse("<h1> remove punctuation </h1>")
 
-def ex(request):
-    sites = ['''
-             <h1>For Entertainment </h1><a href = "https://www.youtube.com" >youtube video</a>
-             <h1>For Interaction </h1><a href = "https://www.facebook.com" >Facebook</a>
-             <h1>For Insight   </h1><a href = "https://www.ted.com/talks" >Ted Talk</a>
-             <h1>For Internship   </h1><a href="https://internshala.com" >Intenship</a>
-             ''' ]
-            
-    return HttpResponse((sites))
 
 

@@ -15,11 +15,6 @@ urlpatterns = [
     path('car/',car,name="car"),
     path('delete-car/<id>/',delete_car,name = "delete_car"),
     path('update_car/<id>/',update_car,name = "update_car"),
-    path('index/',index,name="index"),
-    path('removepunc/',removepunc,name="removepunc"),
-    path('ex/',ex,name="ex"),
-
-
 ]
 
 if settings.DEBUG:
