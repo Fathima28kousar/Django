@@ -1,1 +1,0 @@
-Hello everyone this is my static file and all my media and static files are from this file

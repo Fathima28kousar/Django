@@ -10,5 +10,5 @@ urlpatterns = [
    path("search",search,name="Search"),
    path("productView/<int:myid>", productView, name="ProductView"),
    path("checkout",checkout,name="Checkout"),
-   
+#  path("handlerequest/", handlerequest, name="HandleRequest"),
 ]
