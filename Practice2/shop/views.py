@@ -1,18 +1,39 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import Item
 from math import ceil
 
 
 def home(request):
-    items = Item.objects.all()
-    allItems = []
-    catItems = Item.objects.values('category','id')
-    n = len(items)
-    nSlides = n//4 +(ceil(n/4)+(n//4))
-    params = {'no_of_slides':nSlides,'range':range(1,nSlides),'item':items}
-    return render(request,'shop/index.html',params)
+    allProds = []
+    catprods = Item.objects.values('category','id')
+    cats = {item['category'] for item in catprods}
+    for cat in cats:
+        prod = Item.objects.filter(category=cat)
+        n = len(prod)
+        nSlides = n//4 + ceil((n/4)-(n//4))
+        allProds.append([prod,range(1,nSlides),nSlides])
+    params = {'allProds':allProds}
 
+    product = request.POST.get('product')
+    cart = request.session.get('cart')
+    if cart:
+        quantity = cart.get(product)
+        if quantity:
+            cart[product] = quantity + 1
+        else:
+            cart[product] =1
+    else:
+        cart ={}
+        cart[product] = 1
+    request.session['cart'] = cart
+    print('cart',request.session['cart'])
+    # request.session.get('cart').clear()
+    return render(request, 'shop/index.html', params)
+
+
+
+    
 def about(request):
     return HttpResponse('<h1>this is about page</h1>')
 
