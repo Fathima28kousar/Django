@@ -1,0 +1,16 @@
+{% extends 'shop/base.html' %}
+{% block title %}Cart{% endblock title %}
+{% block body %}
+  <!-- Your existing content for the home page goes here -->
+
+  {% if request.session.cart and request.session.cart.keys|length > 0 %}
+    <!-- Display cart contents -->
+    <div>
+      <h2>Your Cart:</h2>
+      <!-- ... your cart display logic ... -->
+    </div>
+  {% else %}
+    <!-- Cart is empty, display a message or handle accordingly -->
+    <p>Your cart is empty.</p>
+  {% endif %}
+{% endblock body %}

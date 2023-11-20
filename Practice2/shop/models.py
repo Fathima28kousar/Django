@@ -12,3 +12,6 @@ class Item(models.Model):
 
     def __str__(self):
         return self.item_name
+    
+
+

@@ -16,23 +16,29 @@ def home(request):
     params = {'allProds':allProds}
 
     product = request.POST.get('product')
+    remove = request.POST.get('remove')
     cart = request.session.get('cart')
     if cart:
-        quantity = cart.get(product)
-        if quantity:
-            cart[product] = quantity + 1
-        else:
-            cart[product] =1
+            quantity = cart.get(product)
+            if quantity:
+                if remove:
+                    if quantity<=1:
+                        cart.pop(product)
+                    else:
+                        cart[product]  = quantity-1
+                else:
+                    cart[product]  = quantity+1
+
+            else:
+                cart[product] = 1
     else:
-        cart ={}
-        cart[product] = 1
+            cart = {}
+            cart[product] = 1
+
     request.session['cart'] = cart
-    print('cart',request.session['cart'])
-    # request.session.get('cart').clear()
-    return render(request, 'shop/index.html', params)
-
-
-
+    print('cart' , request.session['cart'])
+   
+    return render(request,'shop/index.html', params)
     
 def about(request):
     return HttpResponse('<h1>this is about page</h1>')
@@ -52,4 +58,6 @@ def productView(request):
 def checkout(request):
     return HttpResponse('this is checkout page')
 
-
+def cart(request):
+    print(list(request.session.get('cart').keys()))
+    return render(request,'shop/cart.html')

@@ -64,28 +64,33 @@
             <div class="carousel-item active">
 
                 {% for i in product %}
-                <div class="col-xs-3 col-sm-3 col-md-3">
+                <div class="col-xs-3 col-sm-3 col-md-3" id="{{i.id}}">
                     <div class="card" style="width: 18rem;">
                         <img src='/media/{{i.image}}' class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">{{i.product_name}}</h5>
                             <p class="card-text">{{i.desc}}</p>
-                            {{i | is_in_cart:request.session.cart }}
+                            {{ i|is_in_cart:request.session.cart }}
                             
                         </div>
                         <div class="card-footer p-0">
                             {% if i|is_in_cart:request.session.cart  %}
                             <div class="row  no-gutters">
-                                <input type="submit" value="-" class="col-2 btn btn-dark">
-                                <div class="text-center col">{{i|cart_quantity:request.session.cart}} in cart</div>
-                                <form action="/" method="post" class="col-2">{% csrf_token %}
+                                <form action="#/{{i.id}}" method="post" class="col-2">{% csrf_token %}
+                                    <input hidden type="text" value="{{i.id}}" name="product">
+                                    <input hidden type="number" value="-1" name="remove">
+                                    <input type="submit" value= " - " class="btn btn-block btn btn-dark">
+                                </form>
+                                
+                                <div class="text-center col">{{ i|cart_quantity:request.session.cart }} in cart</div>
+                                <form action="#/{{i.id}}" method="post" class="col-2">{% csrf_token %}
                                     <input hidden type="text" value="{{i.id}}" name="product">
                                     <input type="submit" value= " + " class="btn btn-block btn btn-dark">
                                 </form>
                                 
                             </div>
                             {% else %}
-                            <form action="/" method="post" class="btn-block">{% csrf_token %}
+                            <form action="#/{{i.id}}" method="post" class="btn-block">{% csrf_token %}
                                 <input hidden type="text" value="{{i.id}}" name="product">
                                 <input href="#" type="submit" class="float-right form-control btn btn-primary cart" value="Add To Cart">
                             </form>
