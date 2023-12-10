@@ -7,3 +7,6 @@ class Dish(models.Model):
     dish_description = models.TextField()
     dish_image = models.ImageField(upload_to='dish')
     dish_view_count = models.IntegerField(default=1)
+
+
+
